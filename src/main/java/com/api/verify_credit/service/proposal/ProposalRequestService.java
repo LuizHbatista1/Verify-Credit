@@ -3,6 +3,8 @@ package com.api.verify_credit.service.proposal;
 import com.api.verify_credit.DTOS.proposal.ProposalDTO;
 import com.api.verify_credit.domain.proposal.Proposal;
 import com.api.verify_credit.domain.user.User;
+import com.api.verify_credit.infra.exceptions.IdNotFoundException;
+import com.api.verify_credit.infra.exceptions.ProposalAlreadyExist;
 import com.api.verify_credit.repositories.ProposalRepository;
 import com.api.verify_credit.repositories.UserRepository;
 import com.api.verify_credit.service.proposal.constants.VerifyNameConstants;
@@ -12,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ProposalRequestService {
@@ -47,6 +49,7 @@ public class ProposalRequestService {
         newProposal.setDuration(newProposal.getDuration());
         newProposal.setDescription(newProposal.getDescription());
         newProposal.setVerification(verifyNegativeName());
+        activeProposals(proposalDTO);
         this.saveProposal(newProposal);
         return newProposal;
 
@@ -57,7 +60,6 @@ public class ProposalRequestService {
         this.proposalRepository.save(proposal);
 
     }
-
 
     public String verifyNegativeName(){
 
@@ -72,11 +74,20 @@ public class ProposalRequestService {
 
     }
 
+    public void activeProposals(ProposalDTO proposal){
+
+        if (proposalRepository.existsById(proposal.clientId())){
+
+            throw new ProposalAlreadyExist();
+
+        }
+
+    }
+
     public List<Proposal> getProposalsById (Long clientId){
 
-        User client = userRepository.findById(clientId).orElseThrow(()->new RuntimeException());
+        User client = userRepository.findById(clientId).orElseThrow(()->new IdNotFoundException(clientId));
         return proposalRepository.findProposalByClient(client);
-
 
     }
 

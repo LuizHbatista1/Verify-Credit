@@ -35,7 +35,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> signUp(@RequestBody @Validated RegisterDTO data) throws InvalidJwtException {
+    public ResponseEntity<?> signUp(@RequestBody @Validated RegisterDTO data) throws Exception {
         authService.signUp(data);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

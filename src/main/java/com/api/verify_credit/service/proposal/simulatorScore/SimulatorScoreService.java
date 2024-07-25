@@ -20,4 +20,5 @@ public class SimulatorScoreService implements GenerateScore {
         Random negativeName =  new Random();
         return negativeName.nextBoolean();
     }
+
 }
