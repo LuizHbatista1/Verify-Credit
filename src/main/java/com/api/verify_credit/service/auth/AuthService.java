@@ -38,7 +38,7 @@ public class AuthService implements UserDetailsService {
         String encryptedConfirmPassword = new BCryptPasswordEncoder().encode(data.confirmPassword());
         User newUser = new User(data.firstName() , data.lastName(), data.email(), encryptedPassword , encryptedConfirmPassword ,data.document()  ,data.numberAccount() , data.numberBank(), data.role());
         userService.verifyIfPasswordLengthIsMoreThatEight(data);
-        userService.verifyIfPasswordIsEqualsConfirmPassword(data);
+       // userService.verifyIfPasswordIsEqualsConfirmPassword(data);
         return userRepository.save(newUser);
     }
 

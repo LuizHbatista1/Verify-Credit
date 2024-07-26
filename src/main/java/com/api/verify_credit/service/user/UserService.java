@@ -26,7 +26,7 @@ public class UserService {
 
     }
 
-    public void verifyIfPasswordIsEqualsConfirmPassword(RegisterDTO registerDTO) throws  Exception{
+    /* public void verifyIfPasswordIsEqualsConfirmPassword(RegisterDTO registerDTO) throws  Exception{
 
         if(registerDTO.password() != registerDTO.confirmPassword()) {
 
@@ -36,8 +36,7 @@ public class UserService {
 
     }
 
-
-
+     */
 
     public void verifyIfPasswordLengthIsMoreThatEight(RegisterDTO registerDTO) throws Exception{
 

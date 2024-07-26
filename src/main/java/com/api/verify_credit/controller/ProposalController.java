@@ -46,14 +46,9 @@ public class ProposalController {
                         proposal.getDuration(),
                         proposal.getVerification()
 
-
                 )).collect(Collectors.toList());
 
-
         return new ResponseEntity<>(responseDTOS , HttpStatus.OK);
-
-
-
 
     }
 
