@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -19,6 +18,7 @@ import java.util.stream.Collectors;
 public class ProposalController {
 
     private ProposalRequestService proposalRequestService;
+
 
     @Autowired
     public ProposalController(ProposalRequestService proposalRequestService) {
@@ -51,5 +51,19 @@ public class ProposalController {
         return new ResponseEntity<>(responseDTOS , HttpStatus.OK);
 
     }
+
+    @GetMapping("/{clientId}/response")
+    public ResponseEntity<String>verifyProposal(@PathVariable Long clientId){
+
+        List<Proposal> proposals = proposalRequestService.getProposalsById(clientId);
+        Proposal proposal = proposals.get(0);
+        String result = proposalRequestService.proposalApprovedOrNot(proposal);
+        return ResponseEntity.ok(result);
+
+
+
+    }
+
+
 
 }

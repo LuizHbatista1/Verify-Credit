@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 public class ProposalPendentListener {
 
 
-    @RabbitListener(queues = "${proposal.ms-pendent}")
+    @RabbitListener
     public void listen(Message<ProposalDTO> messageConverter){
 
-        messageConverter.getPayload();
+
 
     }
 

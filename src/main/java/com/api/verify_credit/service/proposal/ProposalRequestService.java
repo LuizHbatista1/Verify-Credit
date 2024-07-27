@@ -91,6 +91,34 @@ public class ProposalRequestService {
 
     }
 
+    public String proposalApprovedOrNot(Proposal proposal){
+
+        int points = pointSystemService.systemPoints();
+
+        if(proposal.getVerification() == VerifyNameConstants.NEGATIVE_NAME_TRUE){
+
+            String proposalRecusedByNameNegative = "Proposal Recused !";
+
+        }
+
+        if (points <= 450 || proposal.getDuration() < 20 ){
+
+            String firstProposal = "Proposal Accepted";
+
+        }
+
+        if (points <= 650 || proposal.getDuration() < 30 ){
+
+            String secondProposal = "Proposal Accepted";
+
+        }
+
+        return "Your proposal will pass for revision !";
+
+
+
+    }
+
     public List<Proposal> getProposalsById (Long clientId){
 
         User client = userRepository.findById(clientId).orElseThrow(()->new IdNotFoundException(clientId));
